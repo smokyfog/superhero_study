@@ -33,6 +33,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _common = _interopRequireDefault(__webpack_require__(/*! ../../common/common.js */ "E:\\h51809\\混合开发\\superhero_study\\common\\common.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -57,9 +72,36 @@ var _common = _interopRequireDefault(__webpack_require__(/*! ../../common/common
 //
 //
 //
-var _default = { data: function data() {return { carourselList: [] };}, onLoad: function onLoad() {var _this = this;uni.request({ url: _common.default.serverUrl + '/index/carousel/list', // url: this.serverUrl + '/index/carousel/list',
-      method: 'POST', header: { 'content-type': 'application/x-www-form-urlencoded' }, data: { qq: "lee49448267" }, success: function success(res) {if (res.data.status == 200) {var carourselList = res.data.data;_this.carourselList = carourselList;}} });},
-  methods: {} };exports.default = _default;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var helloComp = function helloComp() {return __webpack_require__.e(/*! import() | components/helloComp */ "components/helloComp").then(__webpack_require__.bind(null, /*! ../../components/helloComp.vue */ "E:\\h51809\\混合开发\\superhero_study\\components\\helloComp.vue"));};var trailerStars = function trailerStars() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ "E:\\h51809\\混合开发\\superhero_study\\components\\trailerStars.vue"));};var _default = { data: function data() {return { carourselList: [], hotSuperheroList: [] };}, onLoad: function onLoad() {var _this = this;uni.request({ url: _common.default.serverUrl + '/index/carousel/list', // url: this.serverUrl + '/index/carousel/list',
+      method: 'POST', header: { 'content-type': 'application/x-www-form-urlencoded' }, data: { qq: "lee49448267" }, success: function success(res) {if (res.data.status == 200) {var carourselList = res.data.data;_this.carourselList = carourselList;}} }); //查询热门超英
+    uni.request({ url: _common.default.serverUrl + '/index/movie/hot?type=superhero', method: "POST", header: { 'content-type': 'application/x-www-form-urlencoded' }, data: { qq: 'lee49448267' }, success: function success(res) {if (res.data.status == 200) {var hotSuperheroList = res.data.data;
+          _this.hotSuperheroList = hotSuperheroList;
+        }
+      } });
+
+
+  },
+  methods: {},
+
+
+  components: {
+    helloComp: helloComp,
+    trailerStars: trailerStars } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
