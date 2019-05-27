@@ -1,1 +1,0 @@
-<view class="content" bind:__l="__l"><image class="logo" src="/static/logo.png"></image><view><text class="title">{{title}}</text></view><view>{{'i am '+student.age+''}}</view><block wx:for="{{skill}}" wx:for-item="item" wx:for-index="__i0__" wx:key="*this"><view>{{''+item+''}}</view></block></view>
