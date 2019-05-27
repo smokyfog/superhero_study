@@ -50,3 +50,79 @@
 }
 
 /* 热门超英 end */
+
+
+/* 热门预告  start*/
+.hot_movies {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0upx 20upx 20upx 20upx;
+}
+
+.hot_movie_single {
+	width: 350upx;
+	height: 220upx;
+	margin-top: 10upx;
+}
+
+
+
+/* 热门预告   end */
+
+
+/* 猜你喜欢 start */
+.guess_u_like {
+	display: flex;
+	flex-direction: column;
+}
+.single_like_movie {
+	display: flex;
+	flex-direction: row;
+	padding: 30upx 20upx;
+	justify-content: space-between;
+}
+.like_movie {
+	width: 180upx;
+	height: 240upx;
+	border-radius: 3%;
+}
+.movie_desc {
+	width: 340upx;
+	display: flex;
+	flex-direction: column;
+}
+.movie_info {
+	white-space: normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.movie_title {
+	color: #808080;
+	font-size: 14px;
+}
+/* 点赞css */
+.movie_oper {
+	width: 140upx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-left: dashed 1px;
+	border-left-color: #dbdbda;
+}
+.praise_ico {
+	width: 40upx;
+	height: 40upx;
+	align-self: center;
+}
+.praise_me {
+	font-size: 14px;
+	color: #feab2a;
+	align-self: center;
+}
+.animation_opacity{
+	font-weight: bold;
+	opacity: 0;
+}
+/* 猜你喜欢 end */
