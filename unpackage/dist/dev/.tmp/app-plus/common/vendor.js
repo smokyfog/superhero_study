@@ -7149,7 +7149,7 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "E:\\h51809\\
 
 _vue.default.config.productionTip = false;
 _vue.default.prototype.serverUrl = "https://www.imovietrailer.com/superhero";
-_vue.default.prototype.qq = "lee19649030";
+_vue.default.prototype.qq = "lee82577299";
 
 _App.default.mpType = 'app';
 

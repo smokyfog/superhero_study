@@ -1208,7 +1208,7 @@ __wxAppCode__['components/helloComp.wxml']=$gwx('./components/helloComp.wxml');
 __wxAppCode__['components/trailerStars.json']={"usingComponents":{},"component":true};
 __wxAppCode__['components/trailerStars.wxml']=$gwx('./components/trailerStars.wxml');
 
-__wxAppCode__['pages/index/index.json']={"titleNView":false,"usingComponents":{"hello-comp":"/components/helloComp","trailer-stars":"/components/trailerStars"}};
+__wxAppCode__['pages/index/index.json']={"enablePullDownRefresh":true,"titleNView":false,"usingComponents":{"hello-comp":"/components/helloComp","trailer-stars":"/components/trailerStars"}};
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
 __wxAppCode__['pages/me/me.json']={"usingComponents":{}};
@@ -8746,7 +8746,7 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "E:\\h51809\\
 
 _vue.default.config.productionTip = false;
 _vue.default.prototype.serverUrl = "https://www.imovietrailer.com/superhero";
-_vue.default.prototype.qq = "lee19649030";
+_vue.default.prototype.qq = "lee82577299";
 
 _App.default.mpType = 'app';
 

@@ -205,25 +205,40 @@
 				}
 			});
 			
-			//查询猜你喜欢数据列表
-			uni.request({
-				url: common.serverUrl + '/index/guessULike',
-				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
-				data:{
-					qq: this.qq
-				},
-				success: (res) => {
-					if (res.data.status == 200) {
-						var guessULikeList = res.data.data;
-						this.guessULikeList = guessULikeList;
-					}
-				}
-			});
+			this.refresh()
+		},
+		onPullDownRefresh() {
+			this.refresh()
 		},
 		methods: {
+			refresh(){
+				uni.showLoading({	//开启loading
+					mask:true
+				})
+				uni.showNavigationBarLoading()	//开启导航栏loading
+				//查询猜你喜欢数据列表
+				uni.request({
+					url: common.serverUrl + '/index/guessULike',
+					method: "POST",
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						qq: this.qq
+					},
+					success: (res) => {
+						if (res.data.status == 200) {
+							var guessULikeList = res.data.data;
+							this.guessULikeList = guessULikeList;
+						}
+					},
+					complete() {
+						uni.hideLoading()
+						uni.hideNavigationBarLoading()	//关闭导航栏loading
+						uni.stopPullDownRefresh()	//停止下拉刷新
+					}
+				});
+			},
 			//实现点赞动画效果
 			praiseMe(e){
 				// #ifdef APP-PLUS || MP-WEIXIN
