@@ -11,9 +11,95 @@
 
 /*  影片基本信息 start */
 .movie_info {
-
+	padding: 40upx 20upx;
+	display: flex;
+	flex-direction: row;
+	background-color: #f7f4f9;
 }	
+.cover {
+	width: 280upx;
+	height: 380upx;
+}
+.movie_desc {
+	display: flex;
+	flex-direction: column;
+	margin-left: 30upx;
+	width: 400upx;
+}
 
-
+.title {
+	font-size: 30px;
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.basic_info {
+	color: darkgray;
+	font-size: 13px;
+	line-height: 36upx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 /*  影片基本信息 end */
+
+/* 评分块 start */
+.score_block{
+	background: white;
+	margin-top: 20upx;
+	width: 360upx;
+	height: 90upx;
+	padding: 20upx;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	/* 追加阴影效果 */
+	box-shadow: 3px 2px 10px #dedede;
+}
+.score_words {
+	font-size: 12px;
+	color: gray;
+}
+.score_stars {
+	margin-left: 20upx;
+	margin-top: 10upx;
+}
+.movie_score {
+	font-size: 26px;
+	font-weight: bold;
+	margin-left: 8upx;
+	color: #FEAB2A;
+	line-height: 60upx;
+}
+.prise_counts {
+	font-size: 12px;
+	color: gray;
+	line-height: 44upx;
+}
+
+
+/* 评分块 end */
+
+
+
+
+/* <!-- 剧情介绍    start --> */
+.plots_block {
+	background-color: #f7f4f9;
+	padding: 20upx 40upx;
+}
+.plots_title {
+	color: #A9A9A9;
+	font-size: 14px;
+}
+.plots_desc {
+	margin-top: 10upx;
+	font-size: 16px;
+}
+
+		
+		
+		
+/* <!-- 剧情介绍    end --> */
