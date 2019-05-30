@@ -13,9 +13,11 @@
 		
 		<!-- 影片基本信息 start -->
 		<view class="movie_info">
-			<image 
-				:src="trailerInfo.cover" 
-				class="cover"></image>
+			<navigator :url="'../cover/cover?cover=' + trailerInfo.cover">
+				<image 
+					:src="trailerInfo.cover" 
+					class="cover"></image>
+			</navigator>
 			<view class="movie_desc">
 				<view class="title">{{trailerInfo.name}}</view>
 				<view class="basic_info">{{trailerInfo.basicInfo }}</view>
@@ -30,7 +32,7 @@
 					</view>
 					<view class="score_stars">
 						<block v-if="trailerInfo.score >= 0">
-							<trailerStars :innerScore="trailerInfo.score" showNum="0"></trailerStars>
+							 <trailerStars :innerScore="trailerInfo.score" showNum="0"></trailerStars>
 						</block>
 						<view class="prise_counts">
 							{{trailerInfo.prisedCounts}} 人点赞
@@ -53,14 +55,61 @@
 		</view>
 		<!-- 剧情介绍    end -->
 		
+		<!-- 演职人员   start -->
+		<view class="scroll_block">
+			<view class="scroll_title">演职人员</view>
+			<scroll-view scroll-x class="scroll_list">
+				
+				<view class="actor_wapper" v-for="(director,staffIndex) in directorArray" :key="director.id">
+					<image 
+						:src="director.photo" 
+						class="single_actor"
+						mode="aspectFill"
+						@click="lookStaffs"
+						:data-staffIndex="staffIndex"
+						></image>
+					<view class="actor_name">
+						{{director.name}}
+					</view>
+					<view class="actor_role">
+						{{director.actName}}
+					</view>
+				</view> 
+				
+					
+				<view class="actor_wapper" v-for="(actor,actorIndex) in actorArray" :key="actor.id">	
+					<image 
+						:src="actor.photo" 
+						class="single_actor"
+						mode="aspectFill"
+						@click="lookStaffs"
+						:data-staffIndex="actorIndex + directorArray.length"
+						></image>
+					<view class="actor_name">
+						{{actor.name}}
+					</view>
+					<view class="actor_role">
+						{{actor.actName}}
+					</view>
+				</view>
+				
+			</scroll-view>
+		</view>
+		<!-- 演职人员   end -->
+
 		<!-- 剧照  start -->
-		<view class="score_block">
-			<view class="plots_title">剧照</view>
-			<scroll-view scroll-x class="score_list">
+		<view class="scroll_block">
+			<view class="scroll_title">剧照</view>
+			<scroll-view scroll-x class="scroll_list">
 				<image 
-					v-for="img in plotPicsArray" 
+					v-for="(img,imgIndex) in plotPicsArray" 
 					:src="img" 
-					class="ploat_image"></image>
+					:key="imgIndex"
+					class="ploat_image"
+					mode="aspectFill"
+					@click="lookMe"
+					:data-imgIndex="imgIndex"
+					></image>
 			</scroll-view>
 		</view>
 		<!-- 剧照  end -->
@@ -81,9 +130,14 @@
 			}
 		},
 		onLoad(parms) {
-			console.log(parms)
 			var me = this;
 			var trailerId = parms.trailerId;
+			
+			//通过api设置导航栏的属性
+			uni.setNavigationBarColor({
+				frontColor:"#000000",
+				backgroundColor:"#ffffff"
+			})
 			// 获取影片
 			uni.request({
 				url: common.serverUrl + '/search/trailer/' + trailerId,
@@ -137,7 +191,33 @@
 			});
 		},
 		methods: {
-			
+			lookMe(e) {
+				var me = this;
+				var imgIndex = e.currentTarget.dataset.imgindex;
+				console.log(imgIndex)
+				uni.previewImage({
+					current:me.plotPicsArray[imgIndex],
+					urls:this.plotPicsArray,
+					loop:true
+				})
+			},
+			lookStaffs(e) {
+				var me = this;
+				var staffIndex = e.currentTarget.dataset.staffindex;
+				//拼接导演和演员的数组，成为一个新数组
+				var directorArray = me.directorArray;
+				var actorArray = me.actorArray;
+				var newStaffArray = [];
+				newStaffArray = [...directorArray,...actorArray]
+				var urls = [];
+				newStaffArray.map(item=>{
+					urls.push(item.photo)
+				})
+				uni.previewImage({
+					current:urls[staffIndex],
+					urls:urls,
+				})
+			}
 		},
 		components: {
 			trailerStars

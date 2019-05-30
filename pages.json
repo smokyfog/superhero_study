@@ -21,6 +21,16 @@
         }
         ,{
             "path" : "pages/movie/movie",
+            "style": {
+            	"app-plus": {
+                    "titleNView": {
+						"type":"transparent"
+					}
+                }
+            }
+        }
+        ,{
+            "path" : "pages/cover/cover",
             "style" : {}
         }
     ],

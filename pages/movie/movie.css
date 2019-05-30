@@ -105,8 +105,53 @@
 
 
 /* <!-- 剧照    start --> */
+.scroll_block {
+	background-color: #f7f4f9;
+	padding: 20upx 40upx;
+	/* display: flex;
+	flex-direction: column; */
+}
+.scroll_list {
+	width: 100%;
+	white-space: nowrap;
+	margin-top: 20upx;
+}
 
-
-
+.ploat_image {
+	width: 220upx;
+	height: 320upx;
+	margin-right: 10upx;
+	
+}
 
 /* <!-- 剧照    end --> */
+
+
+/* 演职人员    start */
+.single_actor {
+	width: 170upx;
+	height: 240upx;
+	margin-right: 10upx;
+}
+.actor_wapper{
+	display: inline-block;
+}
+.actor_name {
+	width: 170upx;
+	text-align: center;
+	font-size: 15px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.actor_role {
+	width: 170upx;
+	text-align: center;
+	font-size: 13px;
+	color: #A9A9A9;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* 演职人员    end */
