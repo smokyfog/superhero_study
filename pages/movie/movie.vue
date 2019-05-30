@@ -52,7 +52,18 @@
 			<view class="plots_desc">{{trailerInfo.plotDesc}}</view>
 		</view>
 		<!-- 剧情介绍    end -->
-
+		
+		<!-- 剧照  start -->
+		<view class="score_block">
+			<view class="plots_title">剧照</view>
+			<scroll-view scroll-x class="score_list">
+				<image 
+					v-for="img in plotPicsArray" 
+					:src="img" 
+					class="ploat_image"></image>
+			</scroll-view>
+		</view>
+		<!-- 剧照  end -->
 		
 	</view>
 </template>
