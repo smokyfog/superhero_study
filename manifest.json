@@ -52,7 +52,14 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {},
+            "sdkConfigs" : {
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wxf702909ea55035a0",
+                        "appsecret" : "wxf702909ea55035a0"
+                    }
+                }
+            },
             "icons" : {
                 "ios" : {
                     "appstore" : "C:/Users/Administrator/Desktop/a.png",

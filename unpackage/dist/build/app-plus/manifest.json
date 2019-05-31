@@ -110,6 +110,12 @@
       },
       "apple": {},
       "plugins": {
+        "share": {
+          "weixin": {
+            "appid": "wxf702909ea55035a0",
+            "appsecret": "wxf702909ea55035a0"
+          }
+        },
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

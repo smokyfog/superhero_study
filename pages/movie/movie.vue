@@ -190,11 +190,19 @@
 				}
 			});
 		},
+		//此函数仅支持小程序端的分享   分享到微信群或好友
+		onShareAppMessage(res) {
+			var me = this;
+			console.log(me.trailerInfo.name)
+			return {
+				title: me.trailerInfo.name,
+				path: '/pages/movie/movie?trailerId='+ me.trailerInfo.id
+			}
+		},
 		methods: {
 			lookMe(e) {
 				var me = this;
 				var imgIndex = e.currentTarget.dataset.imgindex;
-				console.log(imgIndex)
 				uni.previewImage({
 					current:me.plotPicsArray[imgIndex],
 					urls:this.plotPicsArray,
@@ -217,6 +225,31 @@
 					current:urls[staffIndex],
 					urls:urls,
 				})
+			}
+		},
+		//监听导航浏览的按钮
+		onNavigationBarButtonTap(e) {
+			var me = this;
+			var index = e.index;
+			var trailerInfo = me.trailerInfo; 
+			var trailerId = trailerInfo.id;
+			var trailerName = trailerId.name;
+			var cover = trailerInfo.cover;
+			var poster = trailerInfo.poster;
+			
+			if(index == 0){
+				uni.share({
+					provider: "weixin",
+					scene: "WXSenceTimeline",
+					type: 0,
+					href: "http://www.imovietrailer.com/#/pages/movie/movie?trailerId="+trailerId,
+					title: `超英预告：《${trailerName}》`,
+					summary: "超英预告：《${trailerName}》",
+					imageUrl: cover,
+					success: function (res) {
+						console.log("success:" + JSON.stringify(res));
+					}
+				});
 			}
 		},
 		components: {

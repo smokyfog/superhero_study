@@ -3,7 +3,7 @@ import App from './App'
 
 Vue.config.productionTip = false
 Vue.prototype.serverUrl = "https://www.imovietrailer.com/superhero"
-Vue.prototype.qq = "lee32897867"
+Vue.prototype.qq = "lee50565882"
 
 App.mpType = 'app'
 

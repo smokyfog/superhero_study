@@ -128,3 +128,54 @@
 
 /* <!-- 剧情介绍    end --> */
 
+/* <!-- 剧照    start --> */
+.scroll_block {
+	background-color: #f7f4f9;
+	padding: 20rpx 40rpx;
+	/* display: flex;
+	flex-direction: column; */
+}
+.scroll_list {
+	width: 100%;
+	white-space: nowrap;
+	margin-top: 20rpx;
+}
+.ploat_image {
+	width: 220rpx;
+	height: 320rpx;
+	margin-right: 10rpx;
+}
+
+/* <!-- 剧照    end --> */
+
+/* 演职人员    start */
+.single_actor {
+	width: 170rpx;
+	height: 240rpx;
+	margin-right: 10rpx;
+}
+.actor_wapper{
+	display: inline-block;
+}
+.actor_name {
+	width: 170rpx;
+	text-align: center;
+	font-size: 15px;
+	overflow: hidden;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
+}
+.actor_role {
+	width: 170rpx;
+	text-align: center;
+	font-size: 13px;
+	color: #A9A9A9;
+	overflow: hidden;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
+}
+
+/* 演职人员    end */
+
