@@ -1,5 +1,5 @@
 {
-    "name" : "superhero_study",
+    "name" : "超英预告学习",
     "appid" : "__UNI__B4B4695",
     "description" : "",
     "versionName" : "1.0.0",
@@ -17,7 +17,8 @@
         "modules" : {
             "VideoPlayer" : {},
             "Fingerprint" : {},
-            "Share" : {}
+            "Share" : {},
+            "OAuth" : {}
         },
         /* 模块配置 */
         "distribute" : {
@@ -57,6 +58,20 @@
                     "weixin" : {
                         "appid" : "wxf702909ea55035a0",
                         "appsecret" : "wxf702909ea55035a0"
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "123",
+                        "appsecret" : "123"
+                    },
+                    "qq" : {
+                        "appid" : "123"
+                    },
+                    "sina" : {
+                        "appkey" : "123",
+                        "appsecret" : "123",
+                        "redirect_uri" : "123"
                     }
                 }
             },
@@ -107,5 +122,8 @@
             "minified" : true
         },
         "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "超英预告学习"
     }
 }

@@ -4,7 +4,10 @@
 		<!-- 轮播图 start -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" class="carousel">
 			<swiper-item v-for="caroursel in carourselList" :key="caroursel.id">
-				<image :src="caroursel.image" class="carousel"></image>
+				<image 
+					:src="caroursel.image" 
+					class="carousel"
+					></image>
 			</swiper-item>
 		</swiper>
 		<!-- 轮播图  end-->
@@ -19,7 +22,13 @@
 			</view>
 		</view>
 		<scroll-view scroll-x="true" class="page_block hot">
-			<view class="single_poster" v-for="hotSuperheroList in hotSuperheroList" :key="hotSuperheroList.id">
+			<view 
+				class="single_poster" 
+				v-for="hotSuperheroList in hotSuperheroList" 
+				:key="hotSuperheroList.id"
+				:data-trailerId="hotSuperheroList.id"
+				@click="showTraller"
+				>
 				<view class="poster_wapper">
 					<image :src="hotSuperheroList.cover" class="poster"></image>
 					<view class="movie_name">
@@ -44,12 +53,15 @@
 		
 		<view class="hot_movies page_block">
 			<video
+				:id="trailer.id"
+				:data-playIndex="trailer.id"
+				@play="meIsPlaying"
 				v-for="(trailer,index) in hotTrailerList"
 				:key="index"
 				:src="trailer.trailer"
-				 :poster="trailer.poster"
-				 class="hot_movie_single"
-				 controls></video>
+				:poster="trailer.poster"
+				class="hot_movie_single"
+				controls></video>
 		</view>
 		
 		<!-- 热门预告  end -->
@@ -66,8 +78,16 @@
 		
 		<view class="page_block guess_u_like">
 			
-			<view class="single_like_movie" v-for="(guess, gIndex) in guessULikeList" :key="gIndex">
-				<image :src="guess.cover" class="poster like_movie"></image>
+			<view 
+				class="single_like_movie" 
+				v-for="(guess, gIndex) in guessULikeList" 
+				:key="gIndex">
+				<image 
+					:src="guess.cover" 
+					class="poster like_movie"
+					:data-trailerId="guess.id"
+					@click="showTraller"
+					></image>
 				<view class="movie_desc">
 					<view class="movie_title">
 						{{guess.name}}
@@ -237,7 +257,17 @@
 						uni.hideNavigationBarLoading()	//关闭导航栏loading
 						uni.stopPullDownRefresh()	//停止下拉刷新
 					}
-				});
+				})
+			},
+			showTraller(e){
+				var trailerId = e.currentTarget.dataset.trailerid;
+				//页面跳转api
+				uni.navigateTo({
+					url:"../movie/movie?trailerId="+trailerId
+				})
+				// uni.switchTab({
+				// 	url:"../me/me"
+				// })
 			},
 			//实现点赞动画效果
 			praiseMe(e){
@@ -261,6 +291,27 @@
 					this.animationDataArr[gIndex] = this.animationData.export();
 				}, 1000);
 				// #endif
+			},
+			//播放一个视频时，需要暂停其他正在播放的视频
+			meIsPlaying(e){
+				var me = this;
+				var trailerId = "";
+				if (e) {
+					trailerId = e.currentTarget.dataset.playindex;
+					me.videoContext = uni.createVideoContext(trailerId);
+				}
+				var hotTrailerList = me.hotTrailerList;
+				for(var i = 0; i< hotTrailerList.length ;i++){
+					var tempId = hotTrailerList[i].id;
+					if(tempId != trailerId) {
+						uni.createVideoContext(tempId).pause()
+					}
+				}
+			}
+		},
+		onHide() {
+			if(this.videoContext){
+				this.videoContext.pause()
 			}
 		},
 		components: {

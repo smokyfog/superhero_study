@@ -4,6 +4,7 @@
 		<!-- 视频播放  start-->
 		<view class="player">
 			<video
+				id="myTrailer"
 				:src="trailerInfo.trailer"
 				:poster="trailerInfo.poster"
 				class="movie"
@@ -190,6 +191,20 @@
 				}
 			});
 		},
+		//页面初次渲染完成，获得视频上下文对象
+		onReady() {
+			this.videoContext = uni.createVideoContext('myTrailer');
+		},
+		onHide() {
+			//页面被隐藏的时候暂停播放
+			this.videoContext.pause()
+		},
+		onShow() {
+			//页面被再次显示的时候，可以继续播放
+			if(this.videoContext){
+				this.videoContext.play()
+			}
+		},
 		//此函数仅支持小程序端的分享   分享到微信群或好友
 		onShareAppMessage(res) {
 			var me = this;
@@ -233,7 +248,7 @@
 			var index = e.index;
 			var trailerInfo = me.trailerInfo; 
 			var trailerId = trailerInfo.id;
-			var trailerName = trailerId.name;
+			var trailerName = trailerInfo.name;
 			var cover = trailerInfo.cover;
 			var poster = trailerInfo.poster;
 			
@@ -244,7 +259,7 @@
 					type: 0,
 					href: "http://www.imovietrailer.com/#/pages/movie/movie?trailerId="+trailerId,
 					title: `超英预告：《${trailerName}》`,
-					summary: "超英预告：《${trailerName}》",
+					summary: `超英预告：《${trailerName}》`,
 					imageUrl: cover,
 					success: function (res) {
 						console.log("success:" + JSON.stringify(res));
