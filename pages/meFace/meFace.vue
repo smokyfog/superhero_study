@@ -59,7 +59,7 @@
 					title:"上传中,请稍后..."
 				})
 				uni.uploadFile({
-					url:common.serverUrl + `/user/uploadFace?userId=${globalUser.id}&qq=${me.qq}`,
+					url:common.localUrl + `/user/uploadFace?userId=${globalUser.id}`,
 					filePath:me.tempFace,
 					name:"file",
 					header:{
