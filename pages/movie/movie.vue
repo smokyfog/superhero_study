@@ -140,17 +140,29 @@
 				backgroundColor:"#ffffff"
 			})
 			// 获取影片
+			// uni.request({
+			// 	url: common.serverUrl + '/search/trailer/' + trailerId,
+			// 	method: "POST",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			var trailerInfo = res.data.data;
+			// 			me.trailerInfo = trailerInfo;
+			// 			var plotPicsArray = JSON.parse(trailerInfo.plotPics);
+			// 			me.plotPicsArray = plotPicsArray;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/search/trailer/' + trailerId,
-				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
-				data:{
-					qq: this.qq
-				},
+				url: common.localUrl + '/movie/trailer/' + trailerId,
+				method: "get",
 				success: (res) => {
-					if (res.data.status == 200) {
+					if (res.data.code === 0) {
 						var trailerInfo = res.data.data;
 						me.trailerInfo = trailerInfo;
 						var plotPicsArray = JSON.parse(trailerInfo.plotPics);
@@ -159,33 +171,52 @@
 				}
 			});
 			//获取导演
+			// uni.request({
+			// 	url: common.serverUrl + '/search/staff/' + trailerId + '/1',
+			// 	method: "POST",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			me.directorArray = res.data.data;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/search/staff/' + trailerId + '/1',
-				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
-				data:{
-					qq: this.qq
-				},
+				url: common.localUrl + '/movie/trailer/' + trailerId + '/1',
+				method: "get",
 				success: (res) => {
-					if (res.data.status == 200) {
+					console.log(res)
+					if (res.data.code === 0) {
 						me.directorArray = res.data.data;
 					}
 				}
 			});
 			//获取演员
+			// uni.request({
+			// 	url: common.serverUrl + '/search/staff/' + trailerId + '/2',
+			// 	method: "POST",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			me.actorArray = res.data.data;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/search/staff/' + trailerId + '/2',
-				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
-				data:{
-					qq: this.qq
-				},
+				url: common.localUrl + '/movie/trailer/' + trailerId + '/2',
+				method: "get",
 				success: (res) => {
-					if (res.data.status == 200) {
+					if (res.data.code === 0) {
 						me.actorArray = res.data.data;
 					}
 				}

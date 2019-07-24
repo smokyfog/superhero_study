@@ -46,21 +46,39 @@
 			})
 			uni.showNavigationBarLoading()	//开启导航栏loading
 			//查询猜你喜欢数据列表
+			// uni.request({
+			// 	url: common.serverUrl + '/search/list',
+			// 	method: "get",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq,
+			// 		keywords: "",
+			// 		page: "",
+			// 		pageSize: ""
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			var trailerList = res.data.data.rows;
+			// 			this.trailerList = trailerList;
+			// 		}
+			// 	},
+			// 	complete() {
+			// 		uni.hideLoading()
+			// 		uni.hideNavigationBarLoading()	//关闭导航栏loading
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/search/list',
-				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
+				url: common.localUrl + '/search/list',
+				method: "get",
 				data:{
-					qq: this.qq,
-					keywords: "",
-					page: "",
-					pageSize: ""
+					page: 1,
+					pageSize: 9
 				},
 				success: (res) => {
-					if (res.data.status == 200) {
-						var trailerList = res.data.data.rows;
+					if (res.statusCode == 200) {
+						var trailerList = res.data.rows;
 						this.trailerList = trailerList;
 					}
 				},
@@ -103,22 +121,18 @@
 				uni.showNavigationBarLoading()	//开启导航栏loading
 				//查询猜你喜欢数据列表
 				uni.request({
-					url: common.serverUrl + '/search/list',
-					method: "POST",
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
+					url: common.localUrl + '/search/list',
+					method: "get",
 					data:{
-						qq: this.qq,
 						keywords: keywords,
 						page: page,
 						pageSize: pageSize
 					},
 					success: (res) => {
-						if (res.data.status == 200) {
-							var tempList = res.data.data.rows;
+						if (res.statusCode == 200) {
+							var tempList = res.data.rows;
 							me.trailerList = me.trailerList.concat(tempList);
-							me.totalPages = res.data.data.total;	// 获取总页数
+							me.totalPages = res.data.total;	// 获取总页数
 							me.page = page;		// 覆盖当前页面里的page
 						}
 					},

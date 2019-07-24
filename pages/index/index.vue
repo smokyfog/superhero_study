@@ -171,18 +171,29 @@
 			// #ifdef APP-PLUS || MP-WEIXIN
 				this.animation = uni.createAnimation();
 			// #endif
+			// uni.request({
+			// 	url: common.serverUrl + '/index/carousel/list',
+			// 	// url: this.serverUrl + '/index/carousel/list',
+			// 	method: 'POST',
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data: {
+			// 		qq: this.qq
+			// 	},
+			// 	success: res => {
+			// 		if(res.data.status ==200){
+			// 			var carourselList = res.data.data;
+			// 			this.carourselList = carourselList;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/index/carousel/list',
-				// url: this.serverUrl + '/index/carousel/list',
-				method: 'POST',
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
-				data: {
-					qq: this.qq
-				},
+				url: common.localUrl + '/movie/carousel',
+				method: 'get',
 				success: res => {
-					if(res.data.status ==200){
+					console.log(res)
+					if(res.data.code === 0){
 						var carourselList = res.data.data;
 						this.carourselList = carourselList;
 					}
@@ -190,17 +201,30 @@
 			});
 			
 			//查询热门超英
+			// uni.request({
+			// 	url: common.serverUrl + '/index/movie/hot?type=superhero',
+			// 	method: "POST",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			var hotSuperheroList = res.data.data;
+			// 			this.hotSuperheroList = hotSuperheroList;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/index/movie/hot?type=superhero',
+				url: common.localUrl + '/movie/hot?type=superhero',
 				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
 				data:{
-					qq: this.qq
+					type: 'superhero'
 				},
 				success: (res) => {
-					if (res.data.status == 200) {
+					if (res.data.code === 0) {
 						var hotSuperheroList = res.data.data;
 						this.hotSuperheroList = hotSuperheroList;
 					}
@@ -208,17 +232,30 @@
 			});
 			
 			//查询热门预告
+			// uni.request({
+			// 	url: common.serverUrl + '/index/movie/hot?type=trailer',
+			// 	method: "POST",
+			// 	header:{
+			// 		'content-type':'application/x-www-form-urlencoded'
+			// 	},
+			// 	data:{
+			// 		qq: this.qq
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.status == 200) {
+			// 			var hotTrailerList = res.data.data;
+			// 			this.hotTrailerList = hotTrailerList;
+			// 		}
+			// 	}
+			// });
 			uni.request({
-				url: common.serverUrl + '/index/movie/hot?type=trailer',
+				url: common.localUrl + '/movie/hot?type=trailer',
 				method: "POST",
-				header:{
-					'content-type':'application/x-www-form-urlencoded'
-				},
 				data:{
-					qq: this.qq
+					type: 'trailer'
 				},
 				success: (res) => {
-					if (res.data.status == 200) {
+					if (res.data.code === 0) {
 						var hotTrailerList = res.data.data;
 						this.hotTrailerList = hotTrailerList;
 					}
@@ -237,17 +274,32 @@
 				})
 				uni.showNavigationBarLoading()	//开启导航栏loading
 				//查询猜你喜欢数据列表
+				// uni.request({
+				// 	url: common.serverUrl + '/index/guessULike',
+				// 	method: "POST",
+				// 	header:{
+				// 		'content-type':'application/x-www-form-urlencoded'
+				// 	},
+				// 	data:{
+				// 		qq: this.qq
+				// 	},
+				// 	success: (res) => {
+				// 		if (res.data.status == 200) {
+				// 			var guessULikeList = res.data.data;
+				// 			this.guessULikeList = guessULikeList;
+				// 		}
+				// 	},
+				// 	complete() {
+				// 		uni.hideLoading()
+				// 		uni.hideNavigationBarLoading()	//关闭导航栏loading
+				// 		uni.stopPullDownRefresh()	//停止下拉刷新
+				// 	}
+				// })
 				uni.request({
-					url: common.serverUrl + '/index/guessULike',
-					method: "POST",
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						qq: this.qq
-					},
+					url: common.localUrl + '/movie/guessULike',
+					method: "get",
 					success: (res) => {
-						if (res.data.status == 200) {
+						if (res.data.code === 0) {
 							var guessULikeList = res.data.data;
 							this.guessULikeList = guessULikeList;
 						}

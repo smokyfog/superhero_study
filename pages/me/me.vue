@@ -9,7 +9,7 @@
 			</view>
 			<view class="info-wapper" v-if="userIsLogin">
 					<view class="nickname">
-						{{userInfo.username}}
+						{{userInfo.nickname}}
 					</view>
 					<view class="nav-info">
 						ID: {{userInfo.id}}

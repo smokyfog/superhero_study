@@ -165,18 +165,48 @@
 				var me = this;
 				var username = e.detail.value ? e.detail.value.username : "";
 				var password = e.detail.value ? e.detail.value.password : "";
+				// uni.request({
+				// 	url: common.serverUrl + '/user/registOrLogin?qq='+this.qq,
+				// 	method: "POST",
+				// 	header:{
+				// 		'content-type':'application/json;charset=UTF-8'
+				// 	},
+				// 	data:{
+				// 		"username": username,
+				// 		"password": password
+				// 	},
+				// 	success: (res) => {
+				// 		// 获取真实数据之前，务必判断状态是否为200
+				// 		if (res.data.status == 200) {
+				// 			var userinfo = res.data.data
+				// 			//保存用户信息到全局的缓存中
+				// 			uni.setStorageSync("globalUser",userinfo)
+				// 			//切换页面跳转，使用tab切换的api
+				// 			uni.switchTab({
+				// 				url:"../me/me"
+				// 			})
+				// 		} else if (res.data.status == 500) {
+				// 			uni.showToast({
+				// 				title:res.data.msg,
+				// 				duration:2000,
+				// 				image:"/static/icos/error.png"
+				// 			})
+				// 		}
+				// 	},
+				// 	complete() {
+				// 		
+				// 	}
+				// })
 				uni.request({
-					url: common.serverUrl + '/user/registOrLogin?qq='+this.qq,						method: "POST",
-					header:{
-						'content-type':'application/json;charset=UTF-8'
-					},
+					url: common.localUrl + '/user/registOrLogin',
+					method: "POST",
 					data:{
 						"username": username,
 						"password": password
 					},
 					success: (res) => {
 						// 获取真实数据之前，务必判断状态是否为200
-						if (res.data.status == 200) {
+						if (res.data.code === 0) {
 							var userinfo = res.data.data
 							//保存用户信息到全局的缓存中
 							uni.setStorageSync("globalUser",userinfo)
@@ -184,7 +214,7 @@
 							uni.switchTab({
 								url:"../me/me"
 							})
-						} else if (res.data.status == 500) {
+						} else {
 							uni.showToast({
 								title:res.data.msg,
 								duration:2000,

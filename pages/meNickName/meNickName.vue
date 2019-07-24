@@ -23,6 +23,7 @@
 </template>
 
 <script>
+	import common from '../../common/common.js'
 	export default {
 		data() {
 			return {
@@ -39,8 +40,38 @@
 				var me = this;
 				var nickname = e.detail.value.nickname;
 				
+				// uni.request({
+				// 	url: me.serverUrl + "/user/modifyUserinfo?qq="+me.qq,
+				// 	data: {
+				// 		"userId": me.globalUser.id,
+				// 		"nickname": nickname
+				// 	},
+				// 	header: {
+				// 		"headerUserId": me.globalUser.id,
+				// 		"headerUserToken": me.globalUser.userUniqueToken
+				// 	},
+				// 	method: "POST",
+				// 	success(res) {
+				// 		var resData = res.data;
+				// 		// console.log(typeof(resData));
+				// 		if (resData.status == 200) {
+				// 			// 获得最新的用户数据
+				// 			var userInfo = resData.data;
+				// 			uni.setStorageSync("globalUser", userInfo);
+				// 			uni.navigateBack({
+				// 				delta: 1
+				// 			})
+				// 		} else if (resData.status == 502 || resData.status == 500) {
+				// 			uni.showToast({
+				// 				title: res.data.msg,
+				// 				image: "../../static/icos/error.png",
+				// 				duration: 2000
+				// 			})
+				// 		}
+				// 	}
+				// })
 				uni.request({
-					url: me.serverUrl + "/user/modifyUserinfo?qq="+me.qq,
+					url: common.localUrl + "/user/modifyUserinfo",
 					data: {
 						"userId": me.globalUser.id,
 						"nickname": nickname
@@ -51,16 +82,15 @@
 					},
 					method: "POST",
 					success(res) {
-						var resData = res.data;
-						// console.log(typeof(resData));
-						if (resData.status == 200) {
+						let resData = res.data
+						if (resData.code === 0) {
 							// 获得最新的用户数据
 							var userInfo = resData.data;
 							uni.setStorageSync("globalUser", userInfo);
 							uni.navigateBack({
 								delta: 1
 							})
-						} else if (resData.status == 502 || resData.status == 500) {
+						} else {
 							uni.showToast({
 								title: res.data.msg,
 								image: "../../static/icos/error.png",
