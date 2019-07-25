@@ -68,15 +68,14 @@
 					}, 
 					success(res) {
 						var resData = JSON.parse(res.data) ;
-						console.log(resData)
-						if(resData.status == 200){
+						if(resData.code === 0){
 							//获得最新的用户数据
 							var userInfo = resData.data;
 							uni.setStorageSync("globalUser",userInfo);
 							uni.navigateBack({
 								delta:1
 							})
-						}else if(resData.status == 502 || resData.status == 500){
+						} else {
 							uni.showToast({
 								title:resData.msg,
 								image:"/static/icos/error.png",
