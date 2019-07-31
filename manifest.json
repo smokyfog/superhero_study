@@ -61,10 +61,6 @@
                     }
                 },
                 "oauth" : {
-                    "weixin" : {
-                        "appid" : "123",
-                        "appsecret" : "123"
-                    },
                     "qq" : {
                         "appid" : "123"
                     },
@@ -72,6 +68,10 @@
                         "appkey" : "123",
                         "appsecret" : "123",
                         "redirect_uri" : "123"
+                    },
+                    "weixin" : {
+                        "appid" : "wxf702909ea55035a0",
+                        "appsecret" : "123"
                     }
                 }
             },

@@ -1,6 +1,15 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/test/test",
+			"style": {
+				"app-plus": {
+			        "titleNView": false //禁用原生导航栏
+			    },
+				"enablePullDownRefresh":true	//开启单页面下拉刷新
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"app-plus": {
@@ -85,6 +94,7 @@
             "path" : "pages/sex/sex",
             "style" : {}
         }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
