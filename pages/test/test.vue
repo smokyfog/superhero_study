@@ -1,20 +1,5 @@
 <template>
 	<view class="content">
-		<!--
-		* 广告组件
-		* timedown 倒计时时间
-		* imageUrl 背景图
-		* url 跳转链接
-		*  -->
-		<!-- #ifndef MP -->
-		<mix-advert 
-			ref="mixAdvert" 
-			:timedown="8" 
-			imageUrl="/static/advert.jpg"
-			:url="advertNavUrl"
-		></mix-advert>
-		<!-- #endif -->
-		
 		<!-- 顶部选项卡 -->
 		<scroll-view id="nav-bar" class="nav-bar" scroll-x scroll-with-animation :scroll-left="scrollLeft">
 			<view 
@@ -44,7 +29,13 @@
 						>
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item item_box" @click="navToDetails(item)">
 							<view class="video_box">
-								<video id="myVideo" :src="item.videoSrc" danmu-btn controls></video>
+								<video
+									id="myVideo" 
+									:src="item.trailer" 
+									danmu-btn 
+									controls
+									:enable-progress-gesture="false"
+								/>
 							</view>
 							<view class="oper_box">
 								
@@ -66,6 +57,7 @@
 	import json from '@/json'
 	import mixPulldownRefresh from '@/components/mix/mix-pulldown-refresh/mix-pulldown-refresh';
 	import mixLoadMore from '@/components/mix/mix-load-more/mix-load-more';
+	import common from "../../common/common.js"
 	let windowWidth = 0, scrollTimer = false, tabBar;
 	export default {
 		components: {
@@ -97,26 +89,7 @@
 			this.loadTabbars();
 		},
 		onReady(){
-			/**
-			 * 启动页广告 使用文档（滑稽）
-			 * 1. 引入组件并注册 
-			 * 		import mixAdvert from '@/components/mix-advert/vue/mix-advert';
-			 *      components: {mixAdvert},
-					 <!-- #ifndef MP -->
-						<mix-advert 
-							ref="mixAdvert" 
-							:timedown="8" 
-							imageUrl="/static/advert.jpg"
-							:url="advertNavUrl"
-						></mix-advert>
-					<!-- #endif -->
-			 * 	2. 调用组件的initAdvert()方法进行初始化
-			 * 
-			 *  初始化的时机应该是在splash关闭时，否则会造成在app端广告显示了数秒后首屏才渲染出来
-			 */
-			// #ifndef MP
-			this.$refs.mixAdvert.initAdvert();
-			// #endif
+			this.getvideolist()
 		},
 		methods: {
 			/**
@@ -124,6 +97,17 @@
 			 * 这里直接写的
 			 * mixin使用方法看index.nuve
 			 */
+			// 获取视频列表
+			getvideolist(){
+				uni.request({
+					url: common.localUrl + '/smallmovie/list/',
+					method: 'GET',
+					success: res => {
+						let data = res.data
+						// console.log(data)
+					}
+				});
+			},
 			//获取分类
 			loadTabbars(){
 				let tabList = json.tabList;
@@ -136,7 +120,7 @@
 				this.loadNewsList('add');
 			},
 			//新闻列表
-			loadNewsList(type){
+			async loadNewsList(type){
 				let tabItem = this.tabBars[this.tabCurrentIndex];
 				
 				//type add 加载更多 refresh下拉刷新
@@ -152,32 +136,36 @@
 				}
 				// #endif
 				
+				let res = await uni.request({
+					url: common.localUrl + '/smallmovie/list/',
+					method: 'GET'
+				})
+				let list = res[1].data.data
 				//setTimeout模拟异步请求数据
-				setTimeout(()=>{
-					let list = json.newsList;
-					list.sort((a,b)=>{
-						return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
-					})
-					if(type === 'refresh'){
-						tabItem.newsList = []; //刷新前清空数组
-					}
-					list.forEach(item=>{
-						item.id = parseInt(Math.random() * 10000);
-						tabItem.newsList.push(item);
-					})
-					//下拉刷新 关闭刷新动画
-					if(type === 'refresh'){
-						this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
-						// #ifdef APP-PLUS
-						tabItem.refreshing = false;
-						// #endif
-						tabItem.loadMoreStatus = 0;
-					}
-					//上滑加载 处理状态
-					if(type === 'add'){
-						tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2: 0;
-					}
-				}, 600)
+				// let list = json.newsList;
+				// list.sort((a,b)=>{
+				// 	return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
+				// })
+				if(type === 'refresh'){
+					tabItem.newsList = []; //刷新前清空数组
+				}
+				
+				list.forEach(item=>{
+					item.id = parseInt(Math.random() * 10000);
+					tabItem.newsList.push(item);
+				})
+				//下拉刷新 关闭刷新动画
+				if(type === 'refresh'){
+					this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
+					// #ifdef APP-PLUS
+					tabItem.refreshing = false;
+					// #endif
+					tabItem.loadMoreStatus = 0;
+				}
+				//上滑加载 处理状态
+				if(type === 'add'){
+					tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2: 0;
+				}
 			},
 			//新闻详情
 			navToDetails(item){
