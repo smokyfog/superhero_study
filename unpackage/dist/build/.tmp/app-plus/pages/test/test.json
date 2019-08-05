@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mix-pulldown-refresh": "/components/mix/mix-pulldown-refresh/mix-pulldown-refresh",
+    "mix-load-more": "/components/mix/mix-load-more/mix-load-more",
+    "mix-advert": "/components/mix/mix-advert/vue/mix-advert"
+  }
+}

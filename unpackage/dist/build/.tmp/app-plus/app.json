@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/test/test",
     "pages/index/index",
     "pages/search/search",
     "pages/me/me",
@@ -35,6 +36,12 @@
         "text": "搜索",
         "iconPath": "static/tabBarIco/search.png",
         "selectedIconPath": "static/tabBarIco/search_sel.png"
+      },
+      {
+        "pagePath": "pages/test/test",
+        "text": "视频",
+        "iconPath": "static/tabBarIco/me.png",
+        "selectedIconPath": "static/tabBarIco/me_sel.png"
       },
       {
         "pagePath": "pages/me/me",

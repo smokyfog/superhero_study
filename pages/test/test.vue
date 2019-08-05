@@ -27,18 +27,30 @@
 						:scroll-y="enableScroll" 
 						@scrolltolower="loadMore"
 						>
-						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item item_box" @click="navToDetails(item)">
+						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item item_box">
 							<view class="video_box">
 								<video
 									id="myVideo" 
 									:src="item.trailer" 
 									danmu-btn 
 									controls
+									:poster="item.cover"
 									:enable-progress-gesture="false"
 								/>
 							</view>
 							<view class="oper_box">
-								
+								<div class="userinfo_box">
+									<div class="faceImage_box">
+										<image 
+											:src="item.userinfo[0].faceImage" 
+											mode="aspectFill"
+											style="width: 40px; height: 40px;"
+										/>
+									</div>
+									<div class="usernamebox">
+										<span>{{ item.userinfo[0].nickname }}</span>
+									</div>
+								</div>
 							</view>
 						</view>
 						
@@ -144,7 +156,7 @@
 				//setTimeout模拟异步请求数据
 				// let list = json.newsList;
 				// list.sort((a,b)=>{
-				// 	return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
+				// 	return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序	
 				// })
 				if(type === 'refresh'){
 					tabItem.newsList = []; //刷新前清空数组
