@@ -14,6 +14,7 @@
 
 <style>
 	/*每个页面公共css */
+	@import url("static/font/iconfont.css");
 	.page {
 		width: 100%;
 		height: 100%;

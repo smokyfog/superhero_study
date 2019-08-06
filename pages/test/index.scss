@@ -5,33 +5,73 @@
 	margin-bottom: 6px;
 	.video_box {
 		width: 100%;
-		height: 200px;
+		height: 400upx;
 		video {
 			width: 100%;
 		}
 	}
 	.oper_box {
 		width: 100%;
-		height: 50px;
+		height: 100upx;
 	}
-	.oper_box {
+	.info_box {
+		display: flex;
+		flex-direction: row;
 		.userinfo_box {
+			box-sizing: border-box;
+			height: 100%;
 			width: 50%;
 			float: left;
-			padding: 5px 10px;
+			padding: 10upx 20upx;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
+			.faceImage_box {
+				width: 60upx;
+				height: 60upx;
+				border-radius: 50%;
+				overflow: hidden
+			}
+			.usernamebox {
+				font-size: 13px;
+				margin-left: 15px;
+				display: flex;
+				flex-direction: row;
+				.username {
+					display: inline-block;
+					max-width: 180upx;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					padding-right: 10px;
+					border-right: 1px solid #aaa;
+				}
+				.attent {
+					display: inline-block;
+					overflow: hidden;
+					padding-left: 10px;
+					color: #f55656
+				}
+			}
 		}
-		.faceImage_box {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			overflow: hidden
-		}
-		.usernamebox {
-			font-size: 14px;
-			margin-left: 15px;
+		.oper_box {
+			box-sizing: border-box;
+			height: 100%;
+			width: 50%;
+			float: left;
+			padding: 10upx 20upx;
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: center;
+			.comment {
+				font-size: 13px;
+				margin-right: 10px;
+			}
+			i {
+				font-size: 23px;
+				line-height: 30px;
+				padding: 0 5px;
+			}
 		}
 	}
 }
