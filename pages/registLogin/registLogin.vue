@@ -110,6 +110,11 @@
 									success(result) {
 										if (result.data.status == 200) {
 											var userInfo = result.data.data;
+											uni.showToast({
+												title:"登陆成功",
+												mask:false,
+												duration:1500
+											})
 											// 保存用户信息到全局的缓存中
 											uni.setStorageSync("globalUser", userInfo);
 											// 切换页面跳转，使用tab切换的api
@@ -129,18 +134,18 @@
 			wxLogin(e){
 				var me = this;
 				var userInfo = e.detail.userInfo;
-				console.log(userInfo.avatarUrl)
 				//实现微信登陆
 				uni.login({
 					provider:"weixin",
 					success(loginResult) {
 						//获得微信登陆的code授权码
 						var code = loginResult.code
+						console.log(loginResult)
 						//设置登陆到那个对应的微信小程序。 可以根据自己的后端实现业务参数
 						// [0:NEXT超英预告][1:超英预告][2:NEXT学院电影预告]
 						var loginToWhichMP = 1;
 						uni.request({
-							url:common.serverUrl + `/mpWXLogin/${code}?qq=${me.qq}`,
+							url:common.localUrl + `/user/mpWXLogin/${code}?qq=${me.qq}`,
 							data:{
 								"avatarUrl": userInfo.avatarUrl,
 								"nickName": userInfo.nickName,
@@ -151,6 +156,11 @@
 								console.log(userResult);
 								var userInfo = userResult.data.data;
 								// 保存用户信息到全局的缓存中
+								uni.showToast({
+									title:"登陆成功",
+									mask:false,
+									duration:1500
+								})
 								uni.setStorageSync("globalUser", userInfo);
 								// 切换页面跳转，使用tab切换的api
 								uni.switchTab({
@@ -210,6 +220,11 @@
 							var userinfo = res.data.data
 							//保存用户信息到全局的缓存中
 							uni.setStorageSync("globalUser",userinfo)
+							uni.showToast({
+								title:"登陆成功",
+								mask:false,
+								duration:1500
+							})
 							//切换页面跳转，使用tab切换的api
 							uni.switchTab({
 								url:"../me/me"
