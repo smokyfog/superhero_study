@@ -38,7 +38,7 @@
 									:enable-progress-gesture="false"
 								/>
 							</view>
-							<view class="oper_box">
+							<view class="info_box">
 								<div class="userinfo_box">
 									<div class="faceImage_box">
 										<image 
@@ -48,8 +48,18 @@
 										/>
 									</div>
 									<div class="usernamebox">
-										<span>{{ item.userinfo[0].nickname }}</span>
+										<span class="username">{{ item.userinfo[0].nickname }}</span>
+										<span class="attent">关注</span>
 									</div>
+								</div>
+								<div class="oper_box">
+									<span class="oper">
+										<i class="iconfont icon-shenglvehao"></i>
+									</span>
+									<span class="comment">{{ Math.floor((Math.random()*99)+1) }}</span>
+									<span class="oper">
+										<i class="iconfont icon-huifu6"></i>
+									</span>
 								</div>
 							</view>
 						</view>
